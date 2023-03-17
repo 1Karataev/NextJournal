@@ -14,8 +14,10 @@ const Write: React.FC<WriteProps> = ({title}) => {
   return (
     <div className={styles.main}>
       <Input placeholder='Заголовок ' defaultValue={title} />
-      <Editor />
-      <Button>Опубликовать</Button>
+      <div>
+        <Editor />
+      </div>
+      <Button style={{marginTop: '30px'}}>Опубликовать</Button>
     </div>
   );
 };

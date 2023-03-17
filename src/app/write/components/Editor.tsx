@@ -8,5 +8,5 @@ export const Editor: React.FC = () => {
     });
   }, []);
 
-  return <div id='editor' style={{width: '300px', height: '300px'}} />;
+  return (<> <div id='editor' style={{width: '300px', height: '300px'}} /></>);
 };

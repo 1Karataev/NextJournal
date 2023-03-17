@@ -1,9 +1,14 @@
 import React from 'react';
+import Post from '@/app/components/post/Post';
+import style from './MainPage.module.scss';
 
-const MainPage = () => {
+const MainPage: React.FC = () => {
   return (
-    <div style={{width: '100%', height: '100%', display: 'contents'}}>
-      <div>test</div>
+    <div className={style.container}>
+      <Post/>
+      <Post/>
+      <Post/>
+      <Post/>
     </div>
   );
 };
