@@ -16,9 +16,11 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import {NextPage} from 'next';
 import {Button} from '@mui/material';
 import Link from 'next/link';
+import {useState} from 'react';
+import GlobalModal from '@/app/layout/GlobalModal';
+import AuthModal from '@/app/components/authModal/AuthModal';
 
 const Search = styled('div')(({theme}) => ({
   position: 'relative',
@@ -60,9 +62,10 @@ const StyledInputBase = styled(InputBase)(({theme}) => ({
   },
 }));
 
-const Header: NextPage = () => {
+const Header: React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -84,6 +87,11 @@ const Header: NextPage = () => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const onEnterClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(null);
+    setIsModalOpen(true);
+  };
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -103,6 +111,7 @@ const Header: NextPage = () => {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={onEnterClick}>Войти</MenuItem>
     </Menu>
   );
 
@@ -168,7 +177,9 @@ const Header: NextPage = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant='h6' noWrap component='div' sx={{display: {xs: 'none', sm: 'block'}}}>
+            <Link href='/'>
             MUI
+            </Link>
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -220,6 +231,8 @@ const Header: NextPage = () => {
           </Box>
         </Toolbar>
       </AppBar>
+      <GlobalModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}
+        component={<AuthModal/>}/>
       {renderMobileMenu}
       {renderMenu}
     </Box>
