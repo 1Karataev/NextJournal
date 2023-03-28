@@ -1,11 +1,13 @@
 'use client';
 import React, {useState} from 'react';
-import {Button, IconButton, TextField, Typography} from '@mui/material';
+import {Button, IconButton, Typography} from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Form from '@/app/components/form/Form';
 
 enum TypeAuth {
     MAIN = 'main',
     MAIL = 'mail',
+    REGISTRATION = 'registration',
 }
 
 const AuthModal = () => {
@@ -32,17 +34,17 @@ const AuthModal = () => {
         <IconButton onClick={onArrowClick}>
           <ArrowBackIcon/>
         </IconButton>
-        <TextField
-          required
-          id="outlined-required"
-          label="Почта"
-          style={{marginBottom: '20px'}}
-        />
-        <TextField
-          required
-          id="outlined-required"
-          label="Пароль"
-        /></div>}
+        <Form typeForm='login' typeField={['email', 'password']} labelField={['Email', 'Пароль']}/>
+        <Button variant="contained">Регистрация</Button>
+      </div>}
+
+      {typeAuth === TypeAuth.REGISTRATION && <div>
+        <IconButton onClick={onArrowClick}>
+          <ArrowBackIcon/>
+        </IconButton>
+        <Form typeForm='registration' typeField={['fullName', 'email', 'password']} labelField={['Имя Фамилия', 'Email', 'Пароль']}/>
+        <Button variant="contained">Регистрация</Button>
+      </div>}
     </div>
   );
 };
